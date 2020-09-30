@@ -50,6 +50,16 @@ public class SwiftOverlayWebviewPlugin: NSObject, FlutterPlugin, FlutterStreamHa
         else if(call.method == "back") {
             webviews[webviewID]?.back()
         }
+        else if(call.method == "canGoBack") {
+           let can = webviews[webviewID]?.canGoBack()
+           result(can)
+           return
+        }
+        else if(call.method == "canGoForward") {
+           let can = webviews[webviewID]?.canGoForward()
+           result(can)
+           return
+        }
         else if(call.method == "forward") {
             webviews[webviewID]?.forward()
         }
@@ -188,6 +198,14 @@ public class WebviewManager : NSObject, WKNavigationDelegate, WKUIDelegate, WKSc
     
     public func forward() {
         webview!.goForward()
+    }
+    
+    public func canGoBack() -> Bool {
+        return webview!.canGoBack
+    }
+    
+    public func canGoForward() -> Bool {
+        return webview!.canGoForward
     }
     
     public func reload() {
