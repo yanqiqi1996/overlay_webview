@@ -64,9 +64,7 @@ class WebViewController {
   /// Initialise native WebView instance and subscribe to its events
   Future<void> init() async {
     if (_subscription != null) return;
-    _subscription = _webviewEventsStream
-        .where((data) => data["id"] == _id)
-        .listen(_onEvent);
+    _subscription = _webviewEventsStream.where((data) => data["id"] == _id).listen(_onEvent);
     await _webview.invokeMethod("init", {"id": _id});
   }
 
@@ -166,6 +164,12 @@ class WebViewController {
 
   /// Go back to previous page
   Future<void> back() async => _webview.invokeMethod("back", {"id": _id});
+
+  /// Go back to previous page
+  Future<bool> canGoBack() async => _webview.invokeMethod("canGoBack", {"id": _id});
+
+  /// Go back to previous page
+  Future<bool> canGoForward() async => _webview.invokeMethod("canGoForward", {"id": _id});
 
   /// Go forward to next page
   Future<void> forward() async => _webview.invokeMethod("forward", {"id": _id});

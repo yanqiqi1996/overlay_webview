@@ -143,8 +143,7 @@ class _MyAppState extends State<MyApp> {
               RaisedButton(
                 child: Text("Exec"),
                 onPressed: () async {
-                  print(await webView
-                      .exec("JSON.parse(JSON.stringify(window.location))"));
+                  print(await webView.exec("JSON.parse(JSON.stringify(window.location))"));
                 },
               ),
               RaisedButton(
@@ -158,8 +157,7 @@ class _MyAppState extends State<MyApp> {
               RaisedButton(
                 child: Text("Fullpage"),
                 onPressed: () async {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (_) => FullPage()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_) => FullPage()));
                 },
               ),
               RaisedButton(
@@ -173,7 +171,10 @@ class _MyAppState extends State<MyApp> {
               RaisedButton(
                 child: Text("Back"),
                 onPressed: () async {
-                  webView.back();
+                  final canBack = await webView.canGoBack();
+                  if (canBack) {
+                    webView.back();
+                  }
                 },
               ),
               RaisedButton(
@@ -186,11 +187,12 @@ class _MyAppState extends State<MyApp> {
           ),
           Expanded(
             child: Container(
+              constraints: BoxConstraints.expand(),
               decoration: BoxDecoration(
                 border: Border.all(width: 5, color: Colors.red),
               ),
               child: WebView(
-                url: "https://google.com",
+                url: "http://www.baidu.com",
                 controller: webView,
               ),
             ),

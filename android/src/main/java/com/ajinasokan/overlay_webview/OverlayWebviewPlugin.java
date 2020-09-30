@@ -51,6 +51,14 @@ public class OverlayWebviewPlugin implements FlutterPlugin, MethodCallHandler, S
       webviews.get(webViewID).back();
     } else if (call.method.equals("forward")) {
       webviews.get(webViewID).forward();
+    } else if (call.method.equals("canGoBack")) {
+      boolean canBack =  webviews.get(webViewID).canGoBack();
+      result.success(canBack);
+      return;
+    } else if (call.method.equals("canGoForward")) {
+      boolean canForward =  webviews.get(webViewID).canGoForward();
+      result.success(canForward);
+      return;
     } else if (call.method.equals("load")) {
       webviews.get(webViewID).load((String) call.argument("url"));
     } else if (call.method.equals("loadHTML")) {

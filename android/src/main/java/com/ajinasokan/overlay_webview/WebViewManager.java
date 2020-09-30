@@ -264,6 +264,14 @@ public class WebViewManager {
         webView.goBack();
     }
 
+    boolean canGoBack(){
+        return webView.canGoBack();
+    }
+
+    boolean canGoForward(){
+        return webView.canGoForward();
+    }
+
     void forward() {
         webView.goForward();
     }
