@@ -76,9 +76,13 @@ class WebViewController {
     if (data["type"] == "exec_result") {
       final id = data["data"]["id"] as String;
       final result = data["data"]["result"];
-      if (result is String)
-        _execs[id].complete(json.decode(result));
-      else if (result is Map)
+      if (result is String) {
+        try {
+          _execs[id].complete(json.decode(result));
+        } catch (e) {
+          _execs[id].complete(result);
+        }
+      } else if (result is Map)
         _execs[id].complete(result);
       else
         _execs[id].complete(null);
